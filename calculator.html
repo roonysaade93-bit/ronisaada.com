@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>מחשבון יעילות לוגיסטית | Saa'da Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #d4af37; --dark: #020617; --prm: #818cf8; }
+        body { font-family: 'Heebo', sans-serif; background: var(--dark); color: white; text-align: center; margin: 0; }
+        .calc-card { max-width: 600px; margin: 50px auto; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 30px; border: 1px solid var(--gold); box-shadow: 0 0 20px rgba(212,175,55,0.2); }
+        input[type=range] { width: 100%; margin: 20px 0; accent-color: var(--gold); }
+        .result-box { font-size: 2.5rem; color: var(--gold); font-weight: 900; margin: 20px 0; }
+        .label-text { font-size: 1.2rem; color: #94a3b8; }
+        .btn-report { background: var(--gold); color: black; padding: 15px 30px; border: none; border-radius: 10px; font-weight: 900; cursor: pointer; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="calc-card">
+        <h1 style="color: var(--gold)">מחשבון חיסכון באוטומציה</h1>
+        <p>גרור את הסרגלים כדי לראות כמה האימפריה שלך יכולה לחסוך</p>
+        
+        <div class="label-text">מספר משלוחים בחודש: <span id="val1">50</span></div>
+        <input type="range" id="shipments" min="10" max="1000" value="50" oninput="calculate()">
+
+        <div class="label-text">זמן עבודה ידני למשלוח (דקות): <span id="val2">30</span></div>
+        <input type="range" id="minutes" min="5" max="120" value="30" oninput="calculate()">
+
+        <div class="result-box" id="total-saved">₪ 0</div>
+        <p>חיסכון שנתי מוערך בעלויות תפעול</p>
+        
+        <button class="btn-report" onclick="alert('הדו המלא נשלח ל-CRM של רוני!')">הורד דו"ח אופטימיזציה מלא</button>
+    </div>
+
+    <script>
+        function calculate() {
+            const shipments = document.getElementById('shipments').value;
+            const minutes = document.getElementById('minutes').value;
+            document.getElementById('val1').innerText = shipments;
+            document.getElementById('val2').innerText = minutes;
+
+            // חישוב: משלוחים * דקות * 12 חודשים * עלות שעת עבודה ממוצעת (80 שח) / 60
+            const annualSaving = Math.floor((shipments * minutes * 12 * 80) / 60);
+            document.getElementById('total-saved').innerText = "₪ " + annualSaving.toLocaleString();
+        }
+        calculate(); // אתחול
+    </script>
+</body>
+</html>
